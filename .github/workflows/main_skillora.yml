@@ -26,14 +26,14 @@ jobs:
       - name: Build and install Frontend
         run: |
           cd frontend
-          npm install
+          npm install --legacy-peer-deps
           CI=false npm run build
           cd ..
 
       - name: npm install, build, and test Backend
         run: |
           cd Backend
-          npm install
+          npm install --legacy-peer-deps
           npm run test --if-present
           cd ..
 
