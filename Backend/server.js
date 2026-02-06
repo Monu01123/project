@@ -38,7 +38,7 @@ const app = express();
 // CORS Validation - Must be first
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -164,8 +164,8 @@ app.post("/create-checkout-session", async (req, res) => {
       })),
       mode: "payment",
       billing_address_collection: "required",
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cancel",
+      success_url: `${process.env.CLIENT_URL || "http://localhost:3000"}/success`,
+      cancel_url: `${process.env.CLIENT_URL || "http://localhost:3000"}/cancel`,
       metadata: { userId, courseIds }, // Pass courseIds here
     });
 
