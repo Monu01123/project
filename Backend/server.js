@@ -191,3 +191,25 @@ app.listen(PORT, async () => {
   logger.info(`Server is running on http://localhost:${PORT}`);
   await testConnection();
 });
+
+// Serve static files from the frontend build directory
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Helper to go up one level from 'Backend' to root, then into 'frontend/build'
+// Assuming directory structure:
+// root/
+//   Backend/
+//   frontend/
+const frontendBuildPath = path.join(__dirname, "../frontend/build");
+
+app.use(express.static(frontendBuildPath));
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendBuildPath, "index.html"));
+});
