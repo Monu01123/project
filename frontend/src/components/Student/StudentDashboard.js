@@ -17,14 +17,14 @@ import {
     Stack,
     CircularProgress
 } from '@mui/material';
-import { School, TrendingUp, EmojiEvents, ArrowForward } from '@mui/icons-material';
+import { ArrowForward } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 const StudentDashboard = () => {
   const [auth] = useAuth();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // error state variable was unused, removed.
   const userId = auth?.user?.user_id;
   const navigate = useNavigate();
 

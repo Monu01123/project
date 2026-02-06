@@ -15,6 +15,30 @@
   ],
   "routes": [
     {
+      "src": "/auth/(.*)",
+      "dest": "/Backend/server.js"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "/Backend/server.js"
+    },
+    {
+      "src": "/categories/(.*)",
+      "dest": "/Backend/server.js"
+    },
+    {
+      "src": "/create-checkout-session",
+      "dest": "/Backend/server.js"
+    },
+    {
+      "src": "/webhook",
+      "dest": "/Backend/server.js"
+    },
+    {
+      "src": "/profile",
+      "dest": "/Backend/server.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/Backend/server.js"
     },

@@ -30,8 +30,7 @@ import {
   Add,
   VideoLibrary,
   CloudUpload,
-  AccessTime,
-  FormatListNumbered
+  AccessTime
 } from "@mui/icons-material";
 
 const ManageCourseContent = () => {

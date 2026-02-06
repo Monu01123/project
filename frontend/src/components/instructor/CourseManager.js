@@ -23,7 +23,6 @@ import {
   IconButton,
   Chip,
   Tooltip,
-  Fab,
   CircularProgress
 } from "@mui/material";
 import {
@@ -32,8 +31,7 @@ import {
   Delete,
   RateReview,
   VideoLibrary,
-  CloudUpload,
-  School
+  CloudUpload
 } from "@mui/icons-material";
 
 const InstructorDashboard = () => {
