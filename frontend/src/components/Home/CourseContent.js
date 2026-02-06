@@ -68,8 +68,7 @@ const CourseContent = () => {
         // The original code only passed token if available, but let's see. 
         // Original code used `api/content/enrolled/${courseId}` which sounds like it needs enrollment?
         // But usually syllabus is visible. Let's try the same endpoint.
-        const token = auth?.token;
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        const headers = auth?.token ? { Authorization: `Bearer ${auth.token}` } : {};
 
         try {
             const contentRes = await axiosInstance.get(`api/content/enrolled/${courseId}`, { headers });
