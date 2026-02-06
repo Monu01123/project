@@ -1,0 +1,12 @@
+{
+  "name": "ed-tech-root",
+  "version": "1.0.0",
+  "description": "Root package.json to handle Azure deployment for Backend subdirectory",
+  "scripts": {
+    "start": "cd Backend && npm start",
+    "postinstall": "cd Backend && npm install"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
