@@ -34,7 +34,6 @@ jobs:
         run: |
           cd Backend
           npm install
-          npm run start --if-present
           npm run test --if-present
           cd ..
 
