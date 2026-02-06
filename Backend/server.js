@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs";
 import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
@@ -208,8 +209,26 @@ const frontendBuildPath = path.join(__dirname, "../frontend/build");
 
 app.use(express.static(frontendBuildPath));
 
+// Health check route
+app.get("/health", (req, res) => {
+  res.json({ 
+    status: "ok", 
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV,
+    buildPath: frontendBuildPath,
+    buildExists: fs.existsSync(frontendBuildPath),
+    indexExists: fs.existsSync(path.join(frontendBuildPath, "index.html"))
+  });
+});
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get("*", (req, res) => {
-  res.sendFile(path.join(frontendBuildPath, "index.html"));
+  const indexPath = path.join(frontendBuildPath, "index.html");
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    logger.error(`Frontend build not found at: ${indexPath}`);
+    res.status(404).send("Frontend build not found on server. Please ensure the build process completed successfully.");
+  }
 });
