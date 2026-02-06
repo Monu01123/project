@@ -37,7 +37,6 @@ const StudentDashboard = () => {
         setCourses(response.data);
       } catch (err) {
         console.error('Error fetching enrolled courses:', err);
-        setError('Error fetching enrolled courses');
       } finally {
         setLoading(false);
       }
