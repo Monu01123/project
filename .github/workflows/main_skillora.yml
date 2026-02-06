@@ -37,6 +37,9 @@ jobs:
           npm run test --if-present
           cd ..
 
+      - name: Remove frontend node_modules
+        run: rm -rf frontend/node_modules
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
