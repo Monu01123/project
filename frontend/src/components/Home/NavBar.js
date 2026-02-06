@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosconfig.js";
 import {
   AppBar,
@@ -21,8 +21,6 @@ import {
   ListItemButton,
   ListItemText,
   ListItemIcon,
-  useTheme,
-  useMediaQuery,
   alpha,
   styled,
 } from "@mui/material";
@@ -31,7 +29,6 @@ import {
   Search as SearchIcon,
   ShoppingCartOutlined,
   FavoriteBorderOutlined,
-  AccountCircle,
   Logout,
   Category,
   Dashboard,
@@ -42,7 +39,6 @@ import { useAuth } from "../../Context/auth.js";
 import { useCart } from "./CartContext.js";
 import { useWishlist } from "./WishlistContext.js";
 import logo from "./logo.png";
-import UserProfile from "../Student/Profile.js";
 import Modal from "./modal.js"; // Keeping existing Modal for now
 
 // Styled Components for unique look
@@ -108,8 +104,6 @@ const Navbar = () => {
   const [anchorElCategory, setAnchorElCategory] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
   useEffect(() => {

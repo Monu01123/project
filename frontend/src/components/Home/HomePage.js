@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axiosconfig';
-import { NavLink, useParams, useNavigate } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import Navbar from './NavBar';
 import CategoryList from './Categorylist';
 import Footer from "./Footer.js";
@@ -16,13 +16,11 @@ import {
   CardActions,
   Chip,
   Rating,
-  useTheme,
   Stack,
   Skeleton,
   Avatar
 } from '@mui/material';
 import {
-  AccessTime,
   SignalCellularAlt,
   PlayCircleFilled,
   VerifiedUser,
@@ -128,7 +126,6 @@ const HomePage = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;

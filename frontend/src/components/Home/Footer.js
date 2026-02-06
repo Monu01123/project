@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "./../Home/logo.png";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import videoFile from "./Anthem_V6.mp4";
 import Navbar from "./NavBar";
 import {
@@ -11,8 +11,7 @@ import {
   Link,
   IconButton,
   Stack,
-  Divider,
-  Button
+  Divider
 } from "@mui/material";
 import {
   Facebook,
@@ -26,8 +25,6 @@ import {
 } from "@mui/icons-material";
 
 const Footer = () => {
-    const navigate = useNavigate();
-
   return (
     <Box sx={{ bgcolor: "#1a2b3c", color: "#fff", pt: 8, pb: 4, mt: 'auto' }}>
       <Container maxWidth="xl">

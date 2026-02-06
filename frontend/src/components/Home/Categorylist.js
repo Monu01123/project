@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../axiosconfig";
-import { Box, Chip, Stack, Typography, CircularProgress, Button, Alert } from "@mui/material";
+import { Box, Chip, Stack, Typography, CircularProgress, Button } from "@mui/material";
 import { Category, Code, Brush, Science, Business, MusicNote, Refresh } from "@mui/icons-material";
 
 const CategoryList = () => {

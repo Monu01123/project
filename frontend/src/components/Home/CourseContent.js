@@ -16,22 +16,15 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
   Rating,
   Avatar,
   Stack,
   Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Breadcrumbs,
-  Chip,
-  Skeleton,
-  IconButton
+  Skeleton
 } from "@mui/material";
 import {
   TranslateRounded,
@@ -47,7 +40,6 @@ import {
   VerifiedUser,
   NavigateNext
 } from "@mui/icons-material";
-import { motion } from "framer-motion";
 
 const CourseContent = () => {
   const { courseId } = useParams();
@@ -170,7 +162,6 @@ const CourseContent = () => {
     });
   };
 
-  const formatLevel = (lvl) => lvl ? lvl.charAt(0).toUpperCase() + lvl.slice(1).toLowerCase() : "All Levels";
 
   const LoadingSkeleton = () => (
     <Container maxWidth="lg" sx={{ py: 4 }}>

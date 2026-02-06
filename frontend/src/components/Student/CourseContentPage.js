@@ -21,7 +21,6 @@ import {
     useTheme,
     IconButton,
     Container,
-    Paper,
     LinearProgress
 } from "@mui/material";
 import { 
@@ -29,7 +28,6 @@ import {
     CheckCircle, 
     RadioButtonUnchecked, 
     Menu as MenuIcon,
-    Download,
     EmojiEvents
 } from "@mui/icons-material";
 

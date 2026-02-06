@@ -19,11 +19,9 @@ import {
     Stack,
     Divider
 } from '@mui/material';
-import { Edit, Lock, Person, Email, Save } from '@mui/icons-material';
-import { useAuth } from '../../Context/auth';
+import { Edit, Lock, Save } from '@mui/icons-material';
 
 const UserProfile = () => {
-  const [auth] = useAuth();
   const [userProfile, setUserProfile] = useState({
     full_name: '',
     email: '',

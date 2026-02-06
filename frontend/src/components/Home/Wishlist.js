@@ -36,8 +36,6 @@ const Wishlist = () => {
       setLoading(true);
       try {
         const userId = auth?.user?.user_id;
-        const token = auth?.token;
-
         if (!userId) return;
 
         const response = await axiosInstance.get(`/api/wishlist/user/${userId}`);
@@ -65,7 +63,6 @@ const Wishlist = () => {
 
   const handleRemoveFromWishlist = async (wishlistItemId) => {
     try {
-      const token = auth?.token;
       await axiosInstance.delete(`/api/wishlist/user/${wishlistItemId}`);
       const updatedWishlistItems = wishlistItems.filter((item) => item.wishlist_id !== wishlistItemId);
       setWishlistItems(updatedWishlistItems);
@@ -82,7 +79,6 @@ const Wishlist = () => {
   const handleMoveToCart = async (wishlistItem) => {
     try {
       const userId = auth?.user?.user_id;
-      const token = auth?.token;
 
       await axiosInstance.post(
         "/api/cart",

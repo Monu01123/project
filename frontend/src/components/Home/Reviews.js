@@ -9,10 +9,7 @@ import {
   Avatar,
   Rating,
   Pagination,
-  Card,
-  CardContent,
   Divider,
-  Container,
   Grid
 } from "@mui/material";
 import { deepOrange, deepPurple, teal, indigo, blueGrey } from "@mui/material/colors";
@@ -23,7 +20,6 @@ const Reviews = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 5;
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [filterRating, setFilterRating] = useState(null);
 
   useEffect(() => {
@@ -35,7 +31,6 @@ const Reviews = () => {
 
         if (Array.isArray(response.data)) {
           setReviews(response.data);
-          setError(null);
         } else {
           setReviews([]); // Handle empty or malformed
         }
