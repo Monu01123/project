@@ -140,13 +140,16 @@ const HomePage = () => {
             // instead of just category 1, but preserving original logic for now.
             const response = await axiosInstance.get(`/api/courses/category/${fetchId}`);
             if (isMounted) {
-                setCourses(response.data);
+                // Ensure response.data is an array before setting state
+                const coursesData = Array.isArray(response.data) ? response.data : [];
+                setCourses(coursesData);
                 setError(null);
             }
         } catch (err) {
             console.error('Error fetching courses:', err);
             if (isMounted) { 
                 setError("Unable to load courses. Please check your connection.");
+                setCourses([]); // Ensure courses is always an array
             }
         } finally {
             if (isMounted) setLoading(false);
