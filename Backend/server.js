@@ -25,6 +25,7 @@ import search from "./routes/SearchRoute.js";
 import vediotrack from "./routes/vediotrack.js";
 import certificateRoute from "./routes/certificateRoute.js";
 import { swaggerUi, specs } from "./config/swagger.js";
+import healthRoute from "./routes/healthRoute.js";
 
 import logger from "./utils/logger.js"; // Import logger
 
@@ -62,6 +63,9 @@ app.use(limiter);
 
 // Swagger Documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
+// Health check endpoint
+app.use("/", healthRoute);
 
 // ...
 
