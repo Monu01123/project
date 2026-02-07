@@ -17,12 +17,15 @@ const CategoryList = () => {
       axiosInstance
       .get("/categories") // standardized URL
       .then((response) => {
-        setCategories(response.data);
+        // Ensure response.data is an array before setting state
+        const categoriesData = Array.isArray(response.data) ? response.data : [];
+        setCategories(categoriesData);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
         setError("Failed to load categories.");
+        setCategories([]); // Ensure categories is always an array
         setLoading(false);
       });
   };

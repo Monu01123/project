@@ -110,9 +110,12 @@ const Navbar = () => {
     const fetchCategories = async () => {
       try {
         const response = await axiosInstance.get("/categories");
-        setCategories(response.data);
+        // Ensure response.data is an array before setting state
+        const categoriesData = Array.isArray(response.data) ? response.data : [];
+        setCategories(categoriesData);
       } catch (error) {
         console.error("Error fetching categories:", error.message);
+        setCategories([]); // Ensure categories is always an array
       }
     };
     fetchCategories();
