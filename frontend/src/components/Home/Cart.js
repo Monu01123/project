@@ -12,13 +12,10 @@ import {
   Grid, 
   Typography, 
   Card, 
-  CardContent, 
   CardMedia, 
   Button, 
-  IconButton, 
   Divider, 
-  Stack,
-  Chip 
+  Stack
 } from "@mui/material";
 import { 
   DeleteOutline, 
@@ -138,7 +135,6 @@ const Cart = () => {
       }));
 
       const courseIds = cartItems.map((item) => item.course_id).join(",");
-      const token = auth?.token;
 
       const response = await axiosInstance.post("/create-checkout-session", { items, userId, courseIds });
 

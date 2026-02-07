@@ -188,5 +188,12 @@ async function enrollUserInCourse(userId, courseId) {
   }
 }
 
+// Start server for local development
+app.listen(PORT, async () => {
+  await testConnection();
+  logger.info(`Server is running on port ${PORT}`);
+  logger.info(`Swagger docs available at http://localhost:${PORT}/api-docs`);
+});
+
 // Export the app for Vercel
 export default app;
