@@ -9,7 +9,8 @@ const pool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   ssl: {
-    rejectUnauthorized: false // For Azure MySQL - accepts self-signed certificates
+    require: true, // Force SSL connection for Azure MySQL
+    rejectUnauthorized: false // Accept Azure's SSL certificate
   }
 });
 
