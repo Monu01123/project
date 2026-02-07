@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../axiosconfig';
 import { useNavigate } from 'react-router-dom';
 import "./auth.css";
 
@@ -17,7 +17,7 @@ const ForgotPasswordPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8080/auth/forgot-password', { email });
+      const response = await axiosInstance.post('/auth/forgot-password', { email });
       setMessage(response.data.message);
       setErrorMessage('');
       setStep(2); 
@@ -30,7 +30,7 @@ const ForgotPasswordPage = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/auth/reset-password', {
+      const response = await axiosInstance.post('/auth/reset-password', {
         email,
         token,
         newPassword,

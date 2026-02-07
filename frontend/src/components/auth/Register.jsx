@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../../axiosconfig";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -75,7 +75,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:8080/auth/register", {
+      await axiosInstance.post("/auth/register", {
         full_name,
         email,
         password,
@@ -101,7 +101,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:8080/auth/verify-otp", {
+      await axiosInstance.post("/auth/verify-otp", {
         email,
         otp: otpValue,
       });

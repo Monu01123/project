@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../../axiosconfig";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 // import promo from "../images/admin_promo.png";
@@ -47,7 +47,7 @@ const Admin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8080/auth/register", {
+      const response = await axiosInstance.post("/auth/register", {
         full_name,
         email,
         password,
@@ -76,8 +76,8 @@ const Admin = () => {
     setLoading(true); 
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/auth/verify-otp",
+      const response = await axiosInstance.post(
+        "/auth/verify-otp",
         {
           email,
           otp: otpValue,

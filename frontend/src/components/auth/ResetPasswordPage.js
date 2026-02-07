@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../axiosconfig';
 import { useNavigate } from 'react-router-dom';
 
 const ResetPasswordPage = () => {
@@ -13,7 +13,7 @@ const ResetPasswordPage = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/auth/reset-password', {
+      const response = await axiosInstance.post('/auth/reset-password', {
         email,
         token,
         newPassword,

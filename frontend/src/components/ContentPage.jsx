@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../axiosconfig';
 import { FaVideo, FaThumbsUp, FaThumbsDown, FaFlag } from 'react-icons/fa'; // Import necessary icons
 import CourseCard from './CourseCard';
 
@@ -17,15 +17,15 @@ const ContentPage = () => {
     const fetchCourseData = async () => {
       try {
         // Fetch course details
-        const courseResponse = await axios.get(`http://localhost:8080/api/courses/${course_id}`);
+        const courseResponse = await axiosInstance.get(`/api/courses/${course_id}`);
         setCourse(courseResponse.data);
 
         // Fetch course content
-        const contentResponse = await axios.get(`http://localhost:8080/api/content/${course_id}`);
+        const contentResponse = await axiosInstance.get(`/api/content/${course_id}`);
         setContent(contentResponse.data);
 
         // Fetch course reviews
-        const reviewsResponse = await axios.get(`http://localhost:8080/api/reviews/course/${course_id}`);
+        const reviewsResponse = await axiosInstance.get(`/api/reviews/course/${course_id}`);
         setReviews(reviewsResponse.data);
 
         setLoading(false);

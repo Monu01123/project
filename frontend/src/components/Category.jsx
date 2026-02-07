@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../axiosconfig';
 import { setCategories, setLoading, setError } from '../utils/slices/categorySlice';
 
 const Category = () => {
@@ -13,7 +13,7 @@ const Category = () => {
     const fetchCategories = async () => {
       try {
         dispatch(setLoading());
-        const response = await axios.get('http://localhost:8080/categories');
+        const response = await axiosInstance.get('/categories');
         // Store both category names and IDs
         const categoryData = response.data.map(category => ({
           id: category.category_id,
