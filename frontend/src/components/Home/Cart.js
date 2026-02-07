@@ -19,13 +19,9 @@ import {
 } from "@mui/material";
 import { 
   DeleteOutline, 
-  FavoriteBorder, 
-  ShoppingCartCheckout, 
-  LocalOffer,
-  ArrowBack
+  FavoriteBorder
 } from "@mui/icons-material";
-import { useNavigate, Link } from "react-router-dom";
-import cartImage from "./chat.png"; // Keep or replace with MUI Icon
+import { Link } from "react-router-dom";
 
 const stripePromise = loadStripe(
   "pk_test_51MiCn5SCTwSZDv2RQSoCBZEhWYnhCpG7Yi90uqZm6mTFi2KE2Sp2VNLgrZgjidU209nlFv6qS26GjrIVnCbOQ2eA00bdSwIX1F"
@@ -39,14 +35,12 @@ const Cart = () => {
   const [totalDiscount, setTotalDiscount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [auth] = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCartItems = async () => {
       setLoading(true);
       try {
         const userId = auth?.user?.user_id;
-        const token = auth?.token;
 
         if (!userId) return;
 
@@ -91,7 +85,6 @@ const Cart = () => {
   };
 
   const handleRemoveFromCart = async (cartItemId) => {
-    const token = auth?.token;
     try {
       await axiosInstance.delete(`/api/cart/item/${cartItemId}`);
       const updatedCartItems = cartItems.filter((item) => item.cart_item_id !== cartItemId);
@@ -105,7 +98,6 @@ const Cart = () => {
 
   const handleMoveToWishlist = async (courseId, rmid) => {
     const userId = auth?.user?.user_id;
-    const token = auth?.token;
     try {
       await axiosInstance.post("/api/wishlist", { user_id: userId, course_id: courseId });
 
