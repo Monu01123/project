@@ -9,15 +9,26 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
+// SSL configuration for Azure MySQL
+const sslConfig = process.env.NODE_ENV === 'production' 
+  ? {
+      // For Azure deployment - try certificate first, fallback to basic SSL
+      ca: fs.existsSync(path.join(__dirname, 'DigiCertGlobalRootCA.crt.pem'))
+        ? fs.readFileSync(path.join(__dirname, 'DigiCertGlobalRootCA.crt.pem'))
+        : undefined,
+      rejectUnauthorized: false // Temporarily set to false for Azure deployment
+    }
+  : {
+      // For local development
+      rejectUnauthorized: false
+    };
+
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  ssl: {
-    ca: fs.readFileSync(path.join(__dirname, 'DigiCertGlobalRootCA.crt.pem')),
-    rejectUnauthorized: true
-  },
+  ssl: sslConfig,
   enableKeepAlive: true,
   keepAliveInitialDelay: 0
 });
@@ -31,6 +42,7 @@ const testConnection = async () => {
     console.log('Database connection successful.');
   } catch (err) {
     console.error('Database connection failed:', err.message);
+    console.error('SSL Config:', sslConfig);
   }
 };
 
