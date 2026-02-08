@@ -33,10 +33,13 @@ function findSSLCertificate() {
 
 // SSL configuration for Azure MySQL
 const sslCert = findSSLCertificate();
+// Default to true unless explicitly set to 'false'
+const shouldRejectUnauthorized = process.env.DB_SSL_REJECT_UNAUTHORIZED !== 'false';
+
 const sslConfig = sslCert 
   ? {
       ca: sslCert,
-      rejectUnauthorized: true
+      rejectUnauthorized: shouldRejectUnauthorized
     }
   : {
       // Fallback if certificate not found
