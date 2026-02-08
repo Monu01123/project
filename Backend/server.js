@@ -22,7 +22,7 @@ import uploadRouter from "./routes/uploadRoute.js";
 import { clearCart } from "./Controllers/cartController.js";
 import uploadImageRouter from "./routes/upload.js";
 import search from "./routes/SearchRoute.js";
-import vediotrack from "./routes/vediotrack.js";
+import vediotrack from "./routes/vedioTrack.js"; // Fixed import case
 import certificateRoute from "./routes/certificateRoute.js";
 import { swaggerUi, specs } from "./config/swagger.js";
 import healthRoute from "./routes/healthRoute.js";
@@ -37,12 +37,30 @@ const endpointSecret = process.env.ENDPOINT_SECRET;
 
 const app = express();
 
+
+// Allowed origins
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://skill-sprint-app.vercel.app",
+  process.env.CLIENT_URL
+].filter(Boolean); // Remove empty values
+
 // CORS Validation - Must be first
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
 // Explicitly permit preflight requests
@@ -63,6 +81,12 @@ app.use(limiter);
 
 // Swagger Documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
+
+// Root Endpoint for Azure Health Check
+app.get("/", (req, res) => {
+  res.status(200).send("Server is running");
+});
 
 // Health check endpoint
 app.use("/", healthRoute);
@@ -191,6 +215,18 @@ async function enrollUserInCourse(userId, courseId) {
     throw error;
   }
 }
+
+// Global Error Handlers to prevent crashes
+process.on('uncaughtException', (err) => {
+  logger.error('UNCAUGHT EXCEPTION! 💥 Shutting down gracefully... or logging', err);
+  console.error('UNCAUGHT EXCEPTION:', err);
+  // process.exit(1); // Optional: Restart on crash behavior in Azure
+});
+
+process.on('unhandledRejection', (err) => {
+  logger.error('UNHANDLED REJECTION! 💥 Logging error', err);
+  console.error('UNHANDLED REJECTION:', err);
+});
 
 // Start server for local development
 app.listen(PORT, async () => {
