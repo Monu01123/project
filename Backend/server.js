@@ -3,7 +3,7 @@ import fs from "fs";
 import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
-import authRoutes from "./routes/authRoutes.js";
+import authRoutes from "./routes/AuthRoutes.js";
 import { authenticateToken } from "./middleware/authenticateToken.js";
 import { testConnection } from "./db.js";
 import adminRoutes from "./routes/adminRoutes.js";
