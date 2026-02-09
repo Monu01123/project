@@ -43,6 +43,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
   "https://skill-sprint-app.vercel.app",
+  "https://project-azure-six-24.vercel.app",
   process.env.CLIENT_URL
 ].filter(Boolean); // Remove empty values
 
